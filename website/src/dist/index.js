@@ -6667,6 +6667,7 @@
     EEventType["DrawDone"] = "drawDone";
     EEventType["FeatureUpdated"] = "featureUpdated";
     EEventType["FeatureDeleted"] = "featureDeleted";
+    EEventType["Draging"] = "draging";
     EEventType["Click"] = "click";
     EEventType["DblClick"] = "dblClick";
     EEventType["MouseDown"] = "mouseDown";
@@ -9694,6 +9695,8 @@
               break;
             }
         }
+
+        this.map.eventsObServer.emit(EEventType.Draging, this.map.activeFeature, this.toUpdateShape);
       }
     }, {
       key: "handleActiveFeatureEnd",
@@ -9856,7 +9859,13 @@
     }, {
       key: "onMouseDown",
       value: function onMouseDown(e) {
-        // 相关坐标值处理
+        var btnIndex = Util.EventUtil.getButtonIndex(e); // 鼠标左键按下
+
+        if (btnIndex !== 0) {
+          return;
+        } // 相关坐标值处理
+
+
         var screenX = e.screenX,
             screenY = e.screenY; // 设置保存起始坐标
 
@@ -13390,11 +13399,11 @@
 
         this.platformDom.appendChild(this.supportLayer.dom);
         this.supportLayer.onAdd(this);
-      }
+      } // 添加cursorLayer至当前map
+
     }, {
       key: "addCursorLayer",
-      value: // 添加cursorLayer至当前map
-      function addCursorLayer() {
+      value: function addCursorLayer() {
         // 实例化cursorLayer
         this.cursorLayer = new OverlayLayer("cursor-".concat(uniqueId_1()), {}, {
           zIndex: 3

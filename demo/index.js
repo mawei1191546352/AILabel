@@ -813,7 +813,7 @@
     // as the regeneratorRuntime namespace. Otherwise create a new empty
     // object. Either way, the resulting object will be used to initialize
     // the regeneratorRuntime variable at the top of this file.
-    module.exports 
+    module.exports
   ));
 
   try {
@@ -1320,10 +1320,10 @@
   /*!
    * hotkeys-js v3.8.7
    * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies.
-   * 
+   *
    * Copyright (c) 2021 kenny wong <wowohoo@qq.com>
    * http://jaywcjlove.github.io/hotkeys
-   * 
+   *
    * Licensed under the MIT license.
    */
 
@@ -6667,6 +6667,7 @@
     EEventType["DrawDone"] = "drawDone";
     EEventType["FeatureUpdated"] = "featureUpdated";
     EEventType["FeatureDeleted"] = "featureDeleted";
+    EEventType["Draging"] = "draging";
     EEventType["Click"] = "click";
     EEventType["DblClick"] = "dblClick";
     EEventType["MouseDown"] = "mouseDown";
@@ -9694,6 +9695,8 @@
               break;
             }
         }
+
+        this.map.eventsObServer.emit(EEventType.Draging, this.map.activeFeature, this.toUpdateShape);
       }
     }, {
       key: "handleActiveFeatureEnd",
@@ -9856,7 +9859,13 @@
     }, {
       key: "onMouseDown",
       value: function onMouseDown(e) {
-        // 相关坐标值处理
+        var btnIndex = Util.EventUtil.getButtonIndex(e); // 鼠标左键按下
+
+        if (btnIndex !== 0) {
+          return;
+        } // 相关坐标值处理
+
+
         var screenX = e.screenX,
             screenY = e.screenY; // 设置保存起始坐标
 
