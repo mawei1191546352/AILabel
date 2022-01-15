@@ -15355,6 +15355,57 @@
 
   });
 
+  var name = "ailabel";
+  var version = "5.1.9";
+  var description = "";
+  var browser = "dist/index.js";
+  var browser_demo = "demo/index.js";
+  var browser_website = "website/src/dist/index.js";
+  var dependencies = {
+  	"@babel/runtime": "^7.15.4",
+  	events: "^3.3.0",
+  	"hotkeys-js": "^3.8.7",
+  	lodash: "^4.17.21"
+  };
+  var devDependencies = {
+  	"@babel/core": "^7.14.6",
+  	"@babel/plugin-transform-runtime": "^7.15.0",
+  	"@babel/preset-env": "^7.14.7",
+  	"@babel/preset-typescript": "^7.14.5",
+  	"@rollup/plugin-commonjs": "^19.0.1",
+  	"@rollup/plugin-json": "^4.1.0",
+  	"@rollup/plugin-node-resolve": "^13.0.2",
+  	rollup: "^2.53.2",
+  	"rollup-plugin-babel": "^4.4.0",
+  	"rollup-plugin-uglify": "^6.0.4"
+  };
+  var scripts = {
+  	build: "rollup -c",
+  	dev: "rollup -c -w",
+  	pretest: "npm run build"
+  };
+  var files = [
+  	"dist"
+  ];
+  var author = "";
+  var license = "ISC";
+  var packageJson = {
+  	name: name,
+  	version: version,
+  	description: description,
+  	browser: browser,
+  	browser_demo: browser_demo,
+  	browser_website: browser_website,
+  	dependencies: dependencies,
+  	devDependencies: devDependencies,
+  	scripts: scripts,
+  	files: files,
+  	author: author,
+  	license: license
+  };
+
+  var SDK_VERSION = "".concat(packageJson.version); // 版本号
+
   var AILabel = {
     Map: Map,
     Layer: Layer,
@@ -15364,8 +15415,7 @@
     Text: Text,
     Marker: Marker,
     Util: Util,
-    version: '5.1.8' // 和npm-version保持一致
-
+    version: SDK_VERSION
   };
 
   return AILabel;

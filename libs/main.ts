@@ -8,6 +8,10 @@ import Text from './text/main';
 import Marker from './marker/gMarker';
 import Util from './gUtil';
 
+import packageJson from '../package.json';
+
+const SDK_VERSION = `${packageJson.version}`; // 版本号
+
 const AILabel = {
     Map,
     Layer,
@@ -17,7 +21,7 @@ const AILabel = {
     Text,
     Marker,
     Util,
-    version: '5.1.8' // 和npm-version保持一致
+    version: SDK_VERSION
 };
 
 export default AILabel;
