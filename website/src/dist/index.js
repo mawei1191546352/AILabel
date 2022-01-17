@@ -15357,7 +15357,8 @@
 
   var name = "ailabel";
   var version = "5.1.9";
-  var description = "";
+  var description = "图像标注";
+  var main = "dist/index.js";
   var browser = "dist/index.js";
   var browser_demo = "demo/index.js";
   var browser_website = "website/src/dist/index.js";
@@ -15387,12 +15388,28 @@
   var files = [
   	"dist"
   ];
-  var author = "";
-  var license = "ISC";
+  var repository = {
+  	type: "git",
+  	url: "git+https://github.com/dingyang9642/AILabel.git"
+  };
+  var keywords = [
+  	"ailabel",
+  	"ocr",
+  	"ai",
+  	"label",
+  	"annotation"
+  ];
+  var author = "dingyang";
+  var license = "Apache-2.0";
+  var bugs = {
+  	url: "https://github.com/dingyang9642/AILabel/issues"
+  };
+  var homepage = "https://github.com/dingyang9642/AILabel#readme";
   var packageJson = {
   	name: name,
   	version: version,
   	description: description,
+  	main: main,
   	browser: browser,
   	browser_demo: browser_demo,
   	browser_website: browser_website,
@@ -15400,8 +15417,12 @@
   	devDependencies: devDependencies,
   	scripts: scripts,
   	files: files,
+  	repository: repository,
+  	keywords: keywords,
   	author: author,
-  	license: license
+  	license: license,
+  	bugs: bugs,
+  	homepage: homepage
   };
 
   var SDK_VERSION = "".concat(packageJson.version); // 版本号

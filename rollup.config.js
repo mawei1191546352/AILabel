@@ -31,15 +31,18 @@ export default [
             name: 'AILabel',
             file: pkg.browser,
             format: 'umd'
-        }, {
-            name: 'AILabel',
-            file: pkg.browser_website,
-            format: 'umd'
-        }, {
+        },
+        {
             name: 'AILabel',
             file: pkg.browser_demo,
             format: 'umd'
-        }],
+        }
+        // {
+        //     name: 'AILabel',
+        //     file: pkg.browser_website,
+        //     format: 'umd'
+        // },
+        ],
         plugins
     },
 
