@@ -9859,13 +9859,7 @@
     }, {
       key: "onMouseDown",
       value: function onMouseDown(e) {
-        var btnIndex = Util.EventUtil.getButtonIndex(e); // 鼠标左键按下
-
-        if (btnIndex !== 0) {
-          return;
-        } // 相关坐标值处理
-
-
+        // 相关坐标值处理
         var screenX = e.screenX,
             screenY = e.screenY; // 设置保存起始坐标
 
@@ -9885,6 +9879,14 @@
 
         if (this.map.activeFeature && !isCapturedFeature) {
           this.map.eventsObServer.emit(EEventType.FeatureUnselected, this.map.activeFeature, 'cancel by click');
+          return;
+        }
+
+        var btnIndex = Util.EventUtil.getButtonIndex(e); // 如果存在捕捉到feature或者featureIndex
+
+        var validCaptured = isCapturedFeature && !dragging; // 鼠标左键按下
+
+        if (btnIndex !== 0 && !validCaptured) {
           return;
         }
 
@@ -9910,10 +9912,9 @@
         } else if ((mapMode === EMapMode.DrawMask || mapMode === EMapMode.ClearMask) && drawing) {
           // 绘制｜清除涂抹
           this.handleMaskStart(e);
-        } // 如果存在捕捉到feature或者featureIndex
+        }
 
-
-        if (isCapturedFeature && !dragging) {
+        if (validCaptured) {
           this.handleActiveFeatureStart(e);
         }
       } // onMouseMove: 事件绑定
@@ -10243,7 +10244,7 @@
       value: function setCrosshair(pointInfo) {
         var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-        if (this.map.drawingTip) {
+        if (this.map.drawingCrosshair) {
           this.map.supportLayer.addCrosshair(pointInfo, option);
         } else {
           this.map.supportLayer.removeAllSupports();
@@ -15356,7 +15357,7 @@
   });
 
   var name = "ailabel";
-  var version = "5.1.10";
+  var version = "5.1.11";
   var description = "图像标注";
   var main = "dist/index.js";
   var browser = "dist/index.js";

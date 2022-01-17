@@ -1090,11 +1090,6 @@ export default class EventLayer extends Layer  {
     /*****************************************************/
     // onMouseDown: 事件绑定
     public onMouseDown(e: MouseEvent) {
-        const btnIndex = Util.EventUtil.getButtonIndex(e);
-        // 鼠标左键按下
-        if (btnIndex !== 0) {
-            return
-        }
         // 相关坐标值处理
         const {screenX, screenY} = e;
         // 设置保存起始坐标
@@ -1115,6 +1110,14 @@ export default class EventLayer extends Layer  {
         // 首先判断是否是取消选中
         if (this.map.activeFeature && !isCapturedFeature) {
             this.map.eventsObServer.emit(EEventType.FeatureUnselected, this.map.activeFeature, 'cancel by click');
+            return;
+        }
+
+        const btnIndex = Util.EventUtil.getButtonIndex(e);
+        // 如果存在捕捉到feature或者featureIndex
+        const validCaptured = isCapturedFeature && !dragging;
+        // 鼠标左键按下
+        if (btnIndex !== 0 && !validCaptured) {
             return;
         }
 
@@ -1151,8 +1154,8 @@ export default class EventLayer extends Layer  {
             this.handleMaskStart(e);
         }
 
-        // 如果存在捕捉到feature或者featureIndex
-        if (isCapturedFeature && !dragging) {
+        
+        if (validCaptured) {
             this.handleActiveFeatureStart(e);
         }
     }
@@ -1477,7 +1480,7 @@ export default class EventLayer extends Layer  {
 
     // 设置十字丝[绘制过程中十字丝]
     setCrosshair(pointInfo: IPoint, option: IObject = {}) {
-        if (this.map.drawingTip) {
+        if (this.map.drawingCrosshair) {
             this.map.supportLayer.addCrosshair(pointInfo, option);
         }
         else {
